@@ -25,16 +25,15 @@ function New-AuthenticatorSecret
         [string]
         $UseThisSecretCode = '',
 
-        # definis la période de rafraichissement de l'OTP, par défaut 30 secondes
-        # les implémentations ne supportent pas forcément le changement de cette valeur
+        # define the TOTP refresh interval, 30 seconds is the default
+        # some implementations require a specific value
         [ValidateRange(1,604800)][int32] $period = 30,
         
-        # definis l'algorithme de hashage servant au HMAC, par défaut "SHA1"
-        # la norme permet également l'utilisation de "SHA256","SHA512" mais les implémentations ne les supportent pas forcément
+        # defines the hashing algorithm, SHA256 is the default
+        # not all implementations support all hasing algorithms
         [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA256",
 
-        # definis le nombre de chiffre dans l'OTP résultant, par défaut 6 chiffres
-        # la norme permet également l'obtention d'OTP de 8 chiffres
+        # defines the number of TOTP code digits, 6 is the default
         [ValidateSet(6,8)][int32] $digits = 6,
 
         # Launches a web browser to show a QR Code
@@ -129,28 +128,27 @@ function Get-AuthenticatorPin
                    Position=0)]
         [string] $Secret,
 
-        # definis la période de rafraichissement de l'OTP, par défaut 30 secondes
-        # les implémentations ne supportent pas forcément le changement de cette valeur
+        # define the TOTP refresh interval, 30 seconds is the default
+        # some implementations require a specific value
         [ValidateRange(1,604800)][int32] $period = 30,
         
-        # definis l'algorithme de hashage servant au HMAC, par défaut "SHA1"
-        # la norme permet également l'utilisation de "SHA256","SHA512" mais les implémentations ne les supportent pas forcément
+        # defines the hashing algorithm, SHA256 is the default
+        # not all implementations support all hasing algorithms
         [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA256",
 
-        # definis le nombre de chiffre dans l'OTP résultant, par défaut 6 chiffres
-        # la norme permet également l'obtention d'OTP de 8 chiffres
+        # defines the number of TOTP code digits, 6 is the default
         [ValidateSet(6,8)][int32] $digits = 6,
 
-        # Indique si la sortie doit éviter d'ajouter l'espace oa milieu du code
+        # Do not output spaces in the TOTP value
         [switch] $MakeSpaceless = $false,
 
-        # Indique l'offset en secondes
+        # Time offset specified in seconds
         [Int] $offset = 0,
 
-        # Indique le décalage de l'otp, -1 pour le code précédent, +1 pour le code suivant..
+        # Time shift PIN result, negative values output past results, positive values output future results.
         [Int] $shift = 0,
 
-        # Indique la date pour laquelle on souhaite obtenir l'otp
+        # Specifies the date and time to generate an OTP code for.
         [DateTime] $dateTime
     )
 

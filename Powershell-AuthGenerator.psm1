@@ -27,11 +27,11 @@ function New-AuthenticatorSecret
 
         # definis la période de rafraichissement de l'OTP, par défaut 30 secondes
         # les implémentations ne supportent pas forcément le changement de cette valeur
-        [ValidateRange(1,120)][int32] $period = 30,
+        [ValidateRange(1,604800)][int32] $period = 30,
         
         # definis l'algorithme de hashage servant au HMAC, par défaut "SHA1"
         # la norme permet également l'utilisation de "SHA256","SHA512" mais les implémentations ne les supportent pas forcément
-        [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA1",
+        [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA256",
 
         # definis le nombre de chiffre dans l'OTP résultant, par défaut 6 chiffres
         # la norme permet également l'obtention d'OTP de 8 chiffres
@@ -43,11 +43,11 @@ function New-AuthenticatorSecret
 
 
         # Name is text that will appear under the entry in Google Authenticator app, e.g. a login name
-        [string] $Name = 'Server:g@duval.paris',
+        [string] $Name = 'Server:Test',
 
 
         # Issuer is text that will appear over the entry in Google Authenticator app
-        [string] $Issuer = 'Duval Test Server'
+        [string] $Issuer = 'Test Server'
     )
 
     $Script:Base32Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
@@ -131,11 +131,11 @@ function Get-AuthenticatorPin
 
         # definis la période de rafraichissement de l'OTP, par défaut 30 secondes
         # les implémentations ne supportent pas forcément le changement de cette valeur
-        [ValidateRange(1,120)][int32] $period = 30,
+        [ValidateRange(1,604800)][int32] $period = 30,
         
         # definis l'algorithme de hashage servant au HMAC, par défaut "SHA1"
         # la norme permet également l'utilisation de "SHA256","SHA512" mais les implémentations ne les supportent pas forcément
-        [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA1",
+        [ValidateSet("SHA1","SHA256","SHA512")][string] $algorithm = "SHA256",
 
         # definis le nombre de chiffre dans l'OTP résultant, par défaut 6 chiffres
         # la norme permet également l'obtention d'OTP de 8 chiffres
